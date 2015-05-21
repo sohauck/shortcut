@@ -110,7 +110,7 @@ sub Usage( ; $ )
 NEXcolour.pl
 print "Quit because: $message\n";
 
-Description: Switches the colour of points labels in a NEX file as per conversion list
+Description: switches the colour of point labels in a NEX file as per conversion list
 	
 Example Conversion Format:
 	L1	lc=255 51 204

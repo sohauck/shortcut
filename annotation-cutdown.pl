@@ -90,7 +90,7 @@ sub Usage( ; $ )
 
 annotation-cutdown.pl
 
-Description: keeps only relevant lines from 
+Description: keeps only relevant lines (for CDS extraction) from genome annotation
 
 -in		<FILE> - input filename
 -swap		<FILE> - input filename
