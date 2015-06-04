@@ -8,7 +8,6 @@ Small one-step or two-step scripts for automating simple repetitive tasks
 * listofusableloci: removes loci where not every entry is an integer
 * NEXcolour: switches the colour of point labels in a NEX file as per conversion list
 * NEXswap: switches labels in NEXUS format matrix files 
-* separate-lineages-s2: 
 * splitXMFA: splits a XMFA file produced by BIGSDB GC alignment into one file per locus
 * subtractlist: removes items present in a second list from a first list
 
@@ -19,5 +18,5 @@ Small one-step or two-step scripts for automating simple repetitive tasks
 * FASTAextract: splits concatenated FASTA into ID tab CDS 
 
 #### Label assignment
-* separate-lineages-s1: opens isolate-locus tabel, creates matrix and writes matrix pairs
-* separate-lineages-s2: assigns new lineages based on pairwise distances and known lineages 
+* assign-labels-s1: opens isolate-locus tabel, creates matrix and writes matrix pairs
+* assign-labels-s2: assigns labels based on pairwise distances, cutoff and known labels 

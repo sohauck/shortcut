@@ -140,7 +140,7 @@ sub Usage( ; $ )
 assign-labels-s2.pl
 print "Quit because: $message\n";
 
-Description: assigns new labels based on pairwise distances and known labels 
+Description: assigns labels based on pairwise distances, cutoff and known labels 
 	
 	
 Usage:

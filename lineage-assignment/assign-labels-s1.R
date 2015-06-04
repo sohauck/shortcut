@@ -2,11 +2,11 @@ library(cluster) # for creating matrix
 library(reshape) # for breaking down matrix into pairs
 library(ggplot2) # for plots
 
-#open file
+#open file, a table of isolates as columns and loci as rows
 in.file <- file.choose()
 df <- read.csv(in.file)
 
-# set up data frame with ids as row names and all variables as factors
+# set up data frame with locus ids as row names and all allele numbers as factors
 df <- data.frame(df[,-1], row.names=df[,1])
 df[] <- lapply(df, factor)
 
