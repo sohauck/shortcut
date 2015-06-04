@@ -1,13 +1,14 @@
 #!/usr/bin/perl
 
 #--------------------------------------------------------
-# PROGRAM: separate-lineages-s2.pl
+# PROGRAM: assign-labels-s2.pl
 # AUTHOR:  Sofia Hauck
 # CREATED: 07.03.2015
 # UPDATED: ----------
-# VERSION: v1.10
+# VERSION: v1.2
 #--------------------------------------------------------
 # VERSION HISTORY
+# 04.06.2015 updates plus changing from lineage to less specific label
 #--------------------------------------------------------
 
 use strict;
@@ -49,25 +50,25 @@ if(-e $fOut)  { Usage("Output file already exists: $fOut"); exit; }
 if(($cutoff * 1) != $cutoff)   { Usage("Cutoff isn't a number: $cutoff"); exit; }
 
 # Put information from fLabel into conversion hash
-my %lineages = (); 
-my %foundlineages = ();
+my %labels = (); 
+my %foundlabels = ();
 
-open(LINEAGES, $fLabel) or die "Cannot open $fLabel\n";
-	while ( my $line = <LINEAGES> )											
+open(LABELS, $fLabel) or die "Cannot open $fLabel\n";
+	while ( my $line = <LABELS> )											
 	{        
 		chomp $line; 
 		(my $ID, my $information) = split(/\t/, $line); 
-		$lineages{$ID} = $information;
+		$labels{$ID} = $information;
 	}  
-close(LINEAGES);
+close(LABELS);
 
-#print "Reference lineages were\n";
-#	my @checkkeys = keys(%lineages);
+#print "Reference labels were\n";
+#	my @checkkeys = keys(%labels);
 #	@checkkeys = sort(@checkkeys); 
 #	
 #	foreach my $key ( @checkkeys )
 #	{
-#		my $value = $lineages{$key};
+#		my $value = $labels{$key};
 #		print "$key\t$value\n";
 #	}
 
@@ -84,21 +85,21 @@ open(INFILE, $fPairs) or die "Cannot open $fPairs\n";
 
 		if ( $dissvalue <= $cutoff )
 		{
-			if ( exists $lineages{$firstid} && exists $lineages{$secondid} )
+			if ( exists $labels{$firstid} && exists $labels{$secondid} )
 			{
-				#print "$firstid and $secondid both already defined. Lineages are $lineages{$secondid} and $lineages{$firstid}.\n";
-				if ( $lineages{$firstid}  =! $lineages{$secondid} )
+				#print "$firstid and $secondid both already defined. Lineages are $labels{$secondid} and $labels{$firstid}.\n";
+				if ( $labels{$firstid}  =! $labels{$secondid} )
 				{ print "Mismatch for ids $firstid and $secondid"; exit; }
 			}
-			elsif ( exists $lineages{$firstid} )
+			elsif ( exists $labels{$firstid} )
 			{
 				#print "Only $firstid defined.\n";
-				$foundlineages{$secondid} = $lineages{$firstid};
+				$foundlabels{$secondid} = $labels{$firstid};
 			}
-			elsif ( exists $lineages{$secondid} )
+			elsif ( exists $labels{$secondid} )
 			{
 				#print "Only $secondid defined.\n";
-				$foundlineages{$firstid} = $lineages{$secondid};
+				$foundlabels{$firstid} = $labels{$secondid};
 			}
 			else 
 			{
@@ -113,13 +114,13 @@ open(INFILE, $fPairs) or die "Cannot open $fPairs\n";
 close(INFILE);
 
 # printing out the resulting hash
-my @hashkeys = keys(%foundlineages);
+my @hashkeys = keys(%foundlabels);
 @hashkeys = sort(@hashkeys); 
 
 open(OUTFILE, '>>', $fOut); 
 	foreach my $key ( @hashkeys )
 	{
-		my $value = $foundlineages{$key};
+		my $value = $foundlabels{$key};
 		print OUTFILE "$key\t$value\n";
 	}
 close(OUTFILE); 
@@ -136,14 +137,14 @@ sub Usage( ; $ )
 
 	print << 'EOU';
 
-separate-lineages-s2.pl
+assign-labels-s2.pl
 print "Quit because: $message\n";
 
-Description: assigns new lineages based on pairwise distances and known lineages 
+Description: assigns new labels based on pairwise distances and known labels 
 	
 	
 Usage:
-separate-lineages-s2.pl [ options ]
+assign-labels-s2.pl [ options ]
 
 -in		<FILE> - input filename
 -label		<FILE> - input filename
