@@ -18,7 +18,7 @@ sub Usage( ; $ );
 
 # Defines scalars needed from command line
 my $fPairs;
-my $fLs;
+my $fLabel;
 my $fOut;
 my $cutoff;
 
@@ -48,11 +48,11 @@ if(-e $fOut)  { Usage("Output file already exists: $fOut"); exit; }
 if(-e $fOut)  { Usage("Output file already exists: $fOut"); exit; }
 if(($cutoff * 1) != $cutoff)   { Usage("Cutoff isn't a number: $cutoff"); exit; }
 
-# Put information from fLs into conversion hash
+# Put information from fLabel into conversion hash
 my %lineages = (); 
 my %foundlineages = ();
 
-open(LINEAGES, $fLabel) or die "Cannot open $fLs\n";
+open(LINEAGES, $fLabel) or die "Cannot open $fLabel\n";
 	while ( my $line = <LINEAGES> )											
 	{        
 		chomp $line; 
