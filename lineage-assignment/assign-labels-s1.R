@@ -29,4 +29,4 @@ ggplot(pairs, aes(distance)) +
   geom_histogram(binwidth=10) + # change histogram to 
   geom_vline(xintercept=c(850), linetype="dotted") # change intercept to choose cut-off
 
-# continue with separate-lineages-s2.pl
+# continue with assign-labels-s2.pl
