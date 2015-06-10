@@ -13,10 +13,9 @@ df[] <- lapply(df, factor)
 # build dissimilarity matrix, including actual locus count (instead of proportion)
 dissmat <- ncol(df) * as.matrix(daisy(df, metric ="gower"))
 
-# write matrix to file if wanted (so can avoid this lengthy step in future)
-# 
-# fileName1 <- file.choose(new=TRUE)
-# write.csv(dissmat, file =fileName1)
+# write matrix to file (so can avoid this lengthy step in future) 
+matrix.file <- paste(gsub(".csv","", in.file),"_matrix.csv",sep="")
+write.csv(dissmat, file = matrix.file)
 
 # create pairwise table and write it to file
 pairs <- melt(dissmat)[melt(upper.tri(dissmat))$value,]
